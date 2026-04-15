@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <nav id="navbar">
+      <a href="/">Home</a>
+      <a href="/account">My Account</a>
+    </nav>
+
+    <div class="main">
+<<<<<<< HEAD
+      <h1>Task 3: User role controlled by request parameter</h1>
+=======
+      <h1>Task 1: Unprotected admin functionality</h1>
+>>>>>>> 1479dd935dc3e1f8c896af78e26eaf45f3357953
+      <p>
+        This lab has an admin panel at <strong>/admin</strong>, which identifies
+        administrators using a forgeable cookie.
+      </p>
+      <p>
+        Solve the lab by accessing the admin panel and using it to delete the
+        <strong><%= users[2].username %></strong>
+        user account
+      </p>
+      <p>
+        You can log in to your own account using the following credentials:
+        <strong><%= users[1].username %>:<%= users[1].password %></strong>
+      </p>
+    </div>
+    <br />
+
+    <script defer src="./js/script.js"></script>
+  </body>
+  <script>
+    function getCookie(name) {
+      let cookies = document.cookie.split("; ");
+      for (let cookie of cookies) {
+        let [key, value] = cookie.split("=");
+        if (key === name) return decodeURIComponent(value);
+      }
+      return null;
+    }
+    // Simulating an admin check (In a real-world scenario, get this from a secure API or authentication system)
+    const isAdminCookie = getCookie("isAdmin");
+    console.log(isAdminCookie);
+    const isAdmin = isAdminCookie === "true" ? true : false; // Change this to false to hide the Admin link
+
+    // Get the navbar element
+    const navbar = document.getElementById("navbar");
+    const adminUrl = "admin"; // EJS variable for admin panel URL
+
+    if (isAdmin) {
+      // Create the admin link
+      const adminLink = document.createElement("a");
+      adminLink.href = adminUrl;
+      adminLink.textContent = "Admin Panel";
+
+      // Append to the navbar
+      navbar.appendChild(adminLink);
+    }
+  </script>
+</html>
