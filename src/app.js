@@ -44,13 +44,8 @@ app.get("/account", isAuthenticated, function (req, res) {
   res.render("account", { user: req.session.user });
 });
 
-<<<<<<< HEAD
 app.get("/admin", isAuthenticated, isAdmin, function (req, res) {
   const flag = "13c505a80621";
-=======
-app.get("/administrator-panel", function (req, res) {
-  const flag = "cab853c52730";
->>>>>>> 1479dd935dc3e1f8c896af78e26eaf45f3357953
   const users = userRepo.getAllUsers();
   const nonAdminUsers = users.filter((user) => user.role !== "admin");
   res.render("admin", { users: nonAdminUsers, flag: flag });
