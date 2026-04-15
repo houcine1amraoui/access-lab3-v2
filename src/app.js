@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 
 const userRepo = require("./repositories/userRepository.js");
+const e = require("express");
 
 const app = express();
 
@@ -67,10 +68,15 @@ function isAuthenticated(req, res, next) {
 
 // authorization middleware
 function isAdmin(req, res, next) {
-  if (req.session.user.role != "admin") {
+  const isAdmin = req.cookies.isAdmin;
+  if (isAdmin === "false") {
     return res.redirect("/login");
+  } else if (isAdmin === undefined) {
+    return res.redirect("/login");
+  } else if (isAdmin === "true") {
+    return next();
   }
-  next();
+  return res.redirect("/login");
 }
 
 app.post("/login", (req, res) => {
